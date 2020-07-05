@@ -1,5 +1,6 @@
 package com.thoughtworks;
 
+import com.thoughtworks.Exception.InvalidTicketException;
 import com.thoughtworks.Exception.LockerIsFullException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,5 +35,12 @@ public class LockerTest {
         Bag myBag = sLocker.pickUp(sTicket);
 
         Assert.assertEquals(myBag, sBag);
+    }
+
+    @Test(expected = InvalidTicketException.class)
+    public void should_throw_InvalidTicketException_when_s_locker_pick_up_bag_given_an_invalid_s_ticket() {
+        SLocker sLocker = new SLocker(5);
+
+        sLocker.pickUp(new Ticket(S));
     }
 }
