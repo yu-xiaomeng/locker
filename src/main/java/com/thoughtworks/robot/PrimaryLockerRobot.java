@@ -8,6 +8,9 @@ import java.util.List;
 
 public class PrimaryLockerRobot {
     public PrimaryLockerRobot(List<AbstractLocker> lockers) {
+        if (lockers.isEmpty()) {
+            throw new ConfigErrorException();
+        }
         for(AbstractLocker locker: lockers) {
             if(locker instanceof MLocker == false) {
                 throw new ConfigErrorException();
