@@ -18,10 +18,21 @@ public class LockerTest {
     }
 
     @Test(expected = LockerIsFullException.class)
-    public void should_throw_LockerIsFullException__when_s_locker_store_small_bag_given_s_locker_is_full() {
+    public void should_throw_LockerIsFullException_when_s_locker_store_small_bag_given_s_locker_is_full() {
         SLocker sLocker = new SLocker(1);
         sLocker.store(new Bag(S));
 
         sLocker.store(new Bag(S));
+    }
+
+    @Test
+    public void should_get_bag_when_s_locker_pick_up_bag_given_a_valid_s_ticket() {
+        SLocker sLocker = new SLocker(5);
+        Bag sBag = new Bag(S);
+        Ticket sTicket = sLocker.store(sBag);
+
+        Bag myBag = sLocker.pickUp(sTicket);
+
+        Assert.assertEquals(myBag, sBag);
     }
 }
