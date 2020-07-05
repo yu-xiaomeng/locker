@@ -25,6 +25,12 @@ public class SuperLockerRobot {
     }
 
     public Ticket store(Bag lBag) {
-        return lockers.get(0).store(lBag);
+        AbstractLocker selectedLocker = lockers.get(0);
+        for (AbstractLocker locker : lockers) {
+            if (locker.getVacancyRate() > selectedLocker.getVacancyRate()) {
+                selectedLocker = locker;
+            }
+        }
+        return selectedLocker.store(lBag);
     }
 }

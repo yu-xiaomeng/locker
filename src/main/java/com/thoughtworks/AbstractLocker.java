@@ -7,11 +7,13 @@ import com.thoughtworks.Exception.WrongTypeTicketException;
 import java.util.HashMap;
 
 public abstract class AbstractLocker {
+    private final int capacity;
     private int availableCapacity;
     private HashMap<Ticket, Bag> savedBags = new HashMap<>();
     private final SizeEnum size;
 
     public AbstractLocker(int capacity, SizeEnum size) {
+        this.capacity = capacity;
         this.availableCapacity = capacity;
         this.size = size;
     }
@@ -48,5 +50,9 @@ public abstract class AbstractLocker {
 
     public int getAvailableCapacity() {
         return availableCapacity;
+    }
+
+    public double getVacancyRate() {
+        return this.getAvailableCapacity() / this.capacity;
     }
 }
