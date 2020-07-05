@@ -103,4 +103,52 @@ public class LockerRobotManagerTest {
 
         lockerRobotManager.store(bag);
     }
+
+    @Test
+    public void should_get_bag_when_locker_robot_manager_pick_up_bag_given_a_valid_s_ticket() {
+        SLocker sLocker = new SLocker(5);
+        MLocker mLocker = new MLocker(6);
+        LLocker lLocker = new LLocker(1);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(asList(mLocker));
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(asList(lLocker));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(sLocker, primaryLockerRobot, superLockerRobot);
+        Bag bag = new Bag(SizeEnum.S);
+        Ticket ticket = lockerRobotManager.store(bag);
+
+        Bag myBag = lockerRobotManager.pickUp(ticket);
+
+        Assert.assertEquals(bag, myBag);
+    }
+
+    @Test
+    public void should_get_bag_when_locker_robot_manager_pick_up_bag_given_a_valid_m_ticket() {
+        SLocker sLocker = new SLocker(5);
+        MLocker mLocker = new MLocker(6);
+        LLocker lLocker = new LLocker(1);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(asList(mLocker));
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(asList(lLocker));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(sLocker, primaryLockerRobot, superLockerRobot);
+        Bag bag = new Bag(SizeEnum.M);
+        Ticket ticket = lockerRobotManager.store(bag);
+
+        Bag myBag = lockerRobotManager.pickUp(ticket);
+
+        Assert.assertEquals(bag, myBag);
+    }
+
+    @Test
+    public void should_get_bag_when_locker_robot_manager_pick_up_bag_given_a_valid_l_ticket() {
+        SLocker sLocker = new SLocker(5);
+        MLocker mLocker = new MLocker(6);
+        LLocker lLocker = new LLocker(1);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(asList(mLocker));
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(asList(lLocker));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(sLocker, primaryLockerRobot, superLockerRobot);
+        Bag bag = new Bag(SizeEnum.L);
+        Ticket ticket = lockerRobotManager.store(bag);
+
+        Bag myBag = lockerRobotManager.pickUp(ticket);
+
+        Assert.assertEquals(bag, myBag);
+    }
 }
