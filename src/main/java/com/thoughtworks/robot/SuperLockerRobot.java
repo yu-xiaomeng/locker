@@ -14,6 +14,9 @@ public class SuperLockerRobot {
     }
 
     private void checkLockersConfig(List<AbstractLocker> lockers) {
+        if (lockers.isEmpty()) {
+            throw new ConfigErrorException();
+        }
         for(AbstractLocker locker: lockers) {
             if(locker instanceof LLocker == false) {
                 throw new ConfigErrorException();

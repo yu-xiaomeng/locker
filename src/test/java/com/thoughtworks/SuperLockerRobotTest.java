@@ -16,4 +16,9 @@ public class SuperLockerRobotTest {
 
         new SuperLockerRobot(asList(sLocker, mLocker, lLocker));
     }
+
+    @Test(expected = ConfigErrorException.class)
+    public void should_throw_ConfigErrorException_when_config_super_locker_robot_given_configuration_list_is_not_contain_any_locker() {
+        new SuperLockerRobot(asList());
+    }
 }
