@@ -28,6 +28,8 @@ public class LockerRobotManager {
                 return primaryLockerRobot.store(bag);
             }
             throw new LockerIsFullException();
+        } else if (bag.getSize() == SizeEnum.L) {
+            return superLockerRobot.getLockers().get(0).store(bag);
         }
         return null;
 
