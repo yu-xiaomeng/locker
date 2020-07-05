@@ -8,35 +8,15 @@ import com.thoughtworks.Exception.WrongTypeTicketException;
 
 import java.util.List;
 
-public class PrimaryLockerRobot {
-    private final List<AbstractLocker> lockers;
+public class PrimaryLockerRobot extends AbstractLockerRobot{
 
     public PrimaryLockerRobot(List<AbstractLocker> lockers) {
-        checkLockersConfig(lockers);
-        this.lockers = lockers;
+        super(lockers, SizeEnum.M);
     }
 
-    private void checkLockersConfig(List<AbstractLocker> lockers) {
-        if (lockers.isEmpty()) {
-            throw new ConfigErrorException();
-        }
-        for(AbstractLocker locker: lockers) {
-            if(locker instanceof MLocker == false) {
-                throw new ConfigErrorException();
-            }
-        }
-    }
-
-    public Ticket store(Bag mBag) {
-        AbstractLocker selectedLocker = this.selectValidLocker();
-        if (selectedLocker == null) {
-            throw new LockerIsFullException();
-        }
-        return selectedLocker.store(mBag);
-    }
-
-    private AbstractLocker selectValidLocker() {
-        for (AbstractLocker locker : lockers) {
+    @Override
+    protected AbstractLocker selectValidLocker() {
+        for (AbstractLocker locker : getLockers()) {
             if (locker.getAvailableCapacity() > 0) {
                 return locker;
             }
@@ -44,16 +24,4 @@ public class PrimaryLockerRobot {
         return null;
     }
 
-    public Bag pickUp(Ticket mTicket) {
-        if (mTicket.getSize() != SizeEnum.M) {
-           throw new WrongTypeTicketException();
-        }
-        for (AbstractLocker locker : lockers) {
-            Bag bag = locker.pickUp(mTicket);
-            if (bag != null) {
-                return bag;
-            }
-        }
-        throw new InvalidTicketException();
-    }
 }
