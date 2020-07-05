@@ -3,6 +3,7 @@ package com.thoughtworks;
 import com.thoughtworks.Exception.ConfigErrorException;
 import com.thoughtworks.Exception.InvalidTicketException;
 import com.thoughtworks.Exception.LockerIsFullException;
+import com.thoughtworks.Exception.WrongTypeTicketException;
 import com.thoughtworks.robot.PrimaryLockerRobot;
 import org.junit.Assert;
 import org.junit.Test;
@@ -85,5 +86,14 @@ public class PrimaryLockerRobotTest {
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(asList(mLocker1, mLocker2));
 
         primaryLockerRobot.pickUp(new Ticket(SizeEnum.M));
+    }
+
+    @Test(expected = WrongTypeTicketException.class)
+    public void should_throw_WrongTypeTicketException_when_primary_locker_robot_pick_up_a_m_bag_given_a_s_Ticket() {
+        MLocker mLocker1 = new MLocker(1);
+        MLocker mLocker2 = new MLocker(1);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(asList(mLocker1, mLocker2));
+
+        primaryLockerRobot.pickUp(new Ticket(SizeEnum.S));
     }
 }

@@ -1,12 +1,10 @@
 package com.thoughtworks.robot;
 
-import com.thoughtworks.AbstractLocker;
-import com.thoughtworks.Bag;
+import com.thoughtworks.*;
 import com.thoughtworks.Exception.ConfigErrorException;
 import com.thoughtworks.Exception.InvalidTicketException;
 import com.thoughtworks.Exception.LockerIsFullException;
-import com.thoughtworks.MLocker;
-import com.thoughtworks.Ticket;
+import com.thoughtworks.Exception.WrongTypeTicketException;
 
 import java.util.List;
 
@@ -47,6 +45,9 @@ public class PrimaryLockerRobot {
     }
 
     public Bag pickUp(Ticket mTicket) {
+        if (mTicket.getSize() != SizeEnum.M) {
+           throw new WrongTypeTicketException();
+        }
         for (AbstractLocker locker : lockers) {
             Bag bag = locker.pickUp(mTicket);
             if (bag != null) {
