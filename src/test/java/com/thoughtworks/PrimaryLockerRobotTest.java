@@ -63,4 +63,17 @@ public class PrimaryLockerRobotTest {
 
         primaryLockerRobot.store(new Bag(SizeEnum.M));
     }
+
+    @Test
+    public void should_get_bag_when_primary_locker_robot_pick_up_a_m_bag_given_a_valid_m_Ticket() {
+        MLocker mLocker1 = new MLocker(1);
+        MLocker mLocker2 = new MLocker(1);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(asList(mLocker1, mLocker2));
+        Bag mBag = new Bag(SizeEnum.M);
+        Ticket mTicket = primaryLockerRobot.store(mBag);
+
+        Bag myBag = primaryLockerRobot.pickUp(mTicket);
+
+        Assert.assertEquals(myBag, mBag);
+    }
 }

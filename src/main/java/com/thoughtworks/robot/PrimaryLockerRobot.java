@@ -44,4 +44,11 @@ public class PrimaryLockerRobot {
         }
         return null;
     }
+
+    public Bag pickUp(Ticket mTicket) {
+        for (AbstractLocker locker : lockers) {
+            return locker.pickUp(mTicket);
+        }
+        return null;
+    }
 }
