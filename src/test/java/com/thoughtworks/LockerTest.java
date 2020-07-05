@@ -43,4 +43,13 @@ public class LockerTest {
 
         sLocker.pickUp(new Ticket(S));
     }
+
+    @Test(expected = InvalidTicketException.class)
+    public void should_throw_InvalidTicketException_when_s_locker_pick_up_bag_given_a_reused_s_ticket() {
+        SLocker sLocker = new SLocker(5);
+        Ticket sTicket = sLocker.store(new Bag(S));
+        sLocker.pickUp(sTicket);
+
+        sLocker.pickUp(sTicket);
+    }
 }
