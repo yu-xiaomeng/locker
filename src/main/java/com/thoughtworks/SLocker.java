@@ -2,6 +2,7 @@ package com.thoughtworks;
 
 import com.thoughtworks.Exception.InvalidTicketException;
 import com.thoughtworks.Exception.LockerIsFullException;
+import com.thoughtworks.Exception.WrongTypeTicketException;
 
 import java.util.HashMap;
 
@@ -29,6 +30,9 @@ public class SLocker {
     }
 
     public Bag pickUp(Ticket ticket) {
+        if (ticket.getSize() != S) {
+            throw new WrongTypeTicketException();
+        }
         Bag bag = savedBags.remove(ticket);
         if (bag != null) {
             availableCapacity ++;

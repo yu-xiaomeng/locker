@@ -2,9 +2,11 @@ package com.thoughtworks;
 
 import com.thoughtworks.Exception.InvalidTicketException;
 import com.thoughtworks.Exception.LockerIsFullException;
+import com.thoughtworks.Exception.WrongTypeTicketException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static com.thoughtworks.SizeEnum.M;
 import static com.thoughtworks.SizeEnum.S;
 
 public class LockerTest {
@@ -52,4 +54,13 @@ public class LockerTest {
 
         sLocker.pickUp(sTicket);
     }
+
+    @Test(expected = WrongTypeTicketException.class)
+    public void should_throw_WrongTypeTicketException_when_s_locker_pick_up_bag_given_a_m_ticket() {
+        SLocker sLocker = new SLocker(5);
+        Ticket mTicket = new Ticket(M);
+
+        sLocker.pickUp(mTicket);
+    }
+
 }
