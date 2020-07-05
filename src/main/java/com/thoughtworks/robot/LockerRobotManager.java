@@ -3,6 +3,7 @@ package com.thoughtworks.robot;
 import com.thoughtworks.AbstractLocker;
 import com.thoughtworks.Bag;
 import com.thoughtworks.Exception.ConfigErrorException;
+import com.thoughtworks.Exception.LockerIsFullException;
 import com.thoughtworks.SLocker;
 import com.thoughtworks.Ticket;
 
@@ -20,6 +21,9 @@ public class LockerRobotManager {
     }
 
     public Ticket store(Bag bag) {
-        return sLocker.store(bag);
+        if (sLocker.getAvailableCapacity() > 0 ) {
+            return sLocker.store(bag);
+        }
+        throw new LockerIsFullException();
     }
 }
