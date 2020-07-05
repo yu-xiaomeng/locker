@@ -3,6 +3,7 @@ package com.thoughtworks.robot;
 import com.thoughtworks.AbstractLocker;
 import com.thoughtworks.Bag;
 import com.thoughtworks.Exception.ConfigErrorException;
+import com.thoughtworks.Exception.InvalidTicketException;
 import com.thoughtworks.Exception.LockerIsFullException;
 import com.thoughtworks.MLocker;
 import com.thoughtworks.Ticket;
@@ -47,8 +48,11 @@ public class PrimaryLockerRobot {
 
     public Bag pickUp(Ticket mTicket) {
         for (AbstractLocker locker : lockers) {
-            return locker.pickUp(mTicket);
+            Bag bag = locker.pickUp(mTicket);
+            if (bag != null) {
+                return bag;
+            }
         }
-        return null;
+        throw new InvalidTicketException();
     }
 }
