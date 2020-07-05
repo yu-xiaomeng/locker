@@ -96,4 +96,13 @@ public class PrimaryLockerRobotTest {
 
         primaryLockerRobot.pickUp(new Ticket(SizeEnum.S));
     }
+
+    @Test(expected = WrongTypeTicketException.class)
+    public void should_throw_WrongTypeTicketException_when_primary_locker_robot_pick_up_a_m_bag_given_a_l_Ticket() {
+        MLocker mLocker1 = new MLocker(1);
+        MLocker mLocker2 = new MLocker(1);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(asList(mLocker1, mLocker2));
+
+        primaryLockerRobot.pickUp(new Ticket(SizeEnum.L));
+    }
 }
