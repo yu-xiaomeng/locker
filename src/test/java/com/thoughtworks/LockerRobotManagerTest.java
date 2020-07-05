@@ -151,4 +151,19 @@ public class LockerRobotManagerTest {
 
         Assert.assertEquals(bag, myBag);
     }
+
+    @Test
+    public void should_throw_InvalidTicketException_when_locker_robot_manager_pick_up_bag_given_an_invalid_ticket() {
+        SLocker sLocker = new SLocker(5);
+        MLocker mLocker = new MLocker(6);
+        LLocker lLocker = new LLocker(1);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(asList(mLocker));
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(asList(lLocker));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(sLocker, primaryLockerRobot, superLockerRobot);
+        Bag bag = new Bag(SizeEnum.M);
+
+        lockerRobotManager.store(bag);
+
+
+    }
 }
