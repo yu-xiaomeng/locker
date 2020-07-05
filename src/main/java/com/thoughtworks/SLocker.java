@@ -1,9 +1,11 @@
 package com.thoughtworks;
 
+import com.thoughtworks.Exception.LockerIsFullException;
+
 import static com.thoughtworks.SizeEnum.S;
 
 public class SLocker {
-    private final int availableCapacity;
+    private int availableCapacity;
 
     public SLocker(int capacity) {
         this.availableCapacity = capacity;
@@ -11,8 +13,13 @@ public class SLocker {
 
     public Ticket store(Bag bag) {
         if (bag.getSize() == S) {
-            return new Ticket(S);
+            if (this.availableCapacity > 0 ) {
+                Ticket ticket = new Ticket(S);
+                availableCapacity = availableCapacity - 1;
+                return ticket;
+            }
+
         }
-        return null;
+        throw new LockerIsFullException();
     }
 }
