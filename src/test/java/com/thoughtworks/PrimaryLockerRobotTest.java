@@ -1,6 +1,7 @@
 package com.thoughtworks;
 
 import com.thoughtworks.Exception.ConfigErrorException;
+import com.thoughtworks.Exception.LockerIsFullException;
 import com.thoughtworks.robot.PrimaryLockerRobot;
 import org.junit.Assert;
 import org.junit.Test;
@@ -50,5 +51,16 @@ public class PrimaryLockerRobotTest {
         Assert.assertEquals(SizeEnum.M, mTicket.getSize());
         Bag myBag = mLocker2.pickUp(mTicket);
         Assert.assertEquals(myBag, mBag);
+    }
+
+    @Test(expected = LockerIsFullException.class)
+    public void should_throw_LockerIsFullException_when_primary_locker_robot_store_a_m_bag_given_robot_manage_2_m_lockers_both_full() {
+        MLocker mLocker1 = new MLocker(1);
+        MLocker mLocker2 = new MLocker(1);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(asList(mLocker1, mLocker2));
+        primaryLockerRobot.store(new Bag(SizeEnum.M));
+        primaryLockerRobot.store(new Bag(SizeEnum.M));
+
+        primaryLockerRobot.store(new Bag(SizeEnum.M));
     }
 }
