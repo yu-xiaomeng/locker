@@ -1,11 +1,8 @@
 package com.thoughtworks.robot;
 
-import com.thoughtworks.AbstractLocker;
-import com.thoughtworks.Bag;
+import com.thoughtworks.*;
 import com.thoughtworks.Exception.ConfigErrorException;
 import com.thoughtworks.Exception.LockerIsFullException;
-import com.thoughtworks.SLocker;
-import com.thoughtworks.Ticket;
 
 import java.util.List;
 
@@ -21,9 +18,15 @@ public class LockerRobotManager {
     }
 
     public Ticket store(Bag bag) {
-        if (sLocker.getAvailableCapacity() > 0 ) {
-            return sLocker.store(bag);
+        if (bag.getSize() == SizeEnum.S) {
+            if (sLocker.getAvailableCapacity() > 0 ) {
+                return sLocker.store(bag);
+            }
+            throw new LockerIsFullException();
+        } else if (bag.getSize() == SizeEnum.M) {
+            return primaryLockerRobot.getLockers().get(0).store(bag);
         }
-        throw new LockerIsFullException();
+        return null;
+
     }
 }

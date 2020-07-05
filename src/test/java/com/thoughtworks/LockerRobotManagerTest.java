@@ -39,4 +39,22 @@ public class LockerRobotManagerTest {
 
         lockerRobotManager.store(sBag);
     }
+
+    @Test
+    public void should_store_in_m_locker_and_get_a_m_ticket_when_locker_robot_manager_store_m_bag_given_the_m_locker_has_available_capacity() {
+        SLocker sLocker = new SLocker(5);
+        MLocker mLocker = new MLocker(6);
+        LLocker lLocker = new LLocker(4);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(asList(mLocker));
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(asList(lLocker));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(sLocker, primaryLockerRobot, superLockerRobot);
+        Bag bag = new Bag(SizeEnum.M);
+
+        Ticket ticket = lockerRobotManager.store(bag);
+
+        Assert.assertNotNull(ticket);
+        Assert.assertEquals(SizeEnum.M, ticket.getSize());
+        Bag myBag = mLocker.pickUp(ticket);
+        Assert.assertEquals(myBag, bag);
+    }
 }
