@@ -6,8 +6,7 @@ import com.thoughtworks.Exception.WrongTypeTicketException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static com.thoughtworks.SizeEnum.M;
-import static com.thoughtworks.SizeEnum.S;
+import static com.thoughtworks.SizeEnum.*;
 
 public class LockerTest {
     @Test
@@ -61,6 +60,14 @@ public class LockerTest {
         Ticket mTicket = new Ticket(M);
 
         sLocker.pickUp(mTicket);
+    }
+
+    @Test(expected = WrongTypeTicketException.class)
+    public void should_throw_WrongTypeTicketException_when_s_locker_pick_up_bag_given_a_l_ticket() {
+        SLocker sLocker = new SLocker(5);
+        Ticket lTicket = new Ticket(L);
+
+        sLocker.pickUp(lTicket);
     }
 
 }
