@@ -1,16 +1,16 @@
 package com.thoughtworks.robot;
 
-import com.thoughtworks.AbstractLocker;
+import com.thoughtworks.*;
 import com.thoughtworks.Exception.ConfigErrorException;
-import com.thoughtworks.LLocker;
-import com.thoughtworks.MLocker;
 
 import java.util.List;
 
 public class SuperLockerRobot {
+    private final List<AbstractLocker> lockers;
 
     public SuperLockerRobot(List<AbstractLocker> lockers) {
         checkLockersConfig(lockers);
+        this.lockers = lockers;
     }
 
     private void checkLockersConfig(List<AbstractLocker> lockers) {
@@ -22,5 +22,9 @@ public class SuperLockerRobot {
                 throw new ConfigErrorException();
             }
         }
+    }
+
+    public Ticket store(Bag lBag) {
+        return lockers.get(0).store(lBag);
     }
 }
