@@ -33,7 +33,6 @@
 - Given 一张M号票据，When取包，Then取包失败，提示票据型号错误
 
 ## Locker Robot Manager
-- Given manager配置列表中S号Locker已被配置给其他使用，When配置LockerRobotManager，Then配置失败，提示配置错误
 - Given manager配置列表中PrimaryLockerRobot管理着其他robot管理的M号Locker，When配置LockerRobotManager，Then配置失败，提示配置错误
 - Given manager配置列表中SuperLockerRobot管理着其他robot管理的L号Locker，When配置LockerRobotManager，Then配置失败，提示配置错误
 - Given manager管理的S号Locker有可用容量，S号包，When存包，Then存包成功，返回S号票据
