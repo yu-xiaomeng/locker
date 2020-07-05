@@ -11,7 +11,7 @@
 - Given S号Locker，L号的票据，When取包，Then取包失败，提示票据型号错误
 
 ## Primary Locker Robot
-- Given PrimaryLockerRobot配置列表中包含S号和L号Locker，When配置PrimaryLockerRobot，Then 配置失败，提示配置错误
+- Given PrimaryLockerRobot配置列表中除了M号Locker还包含S号和L号Locker，When配置PrimaryLockerRobot，Then 配置失败，提示配置错误
 - Given PrimaryLockerRobot配置列表为空，When配置PrimaryLockerRobot，Then 配置失败，提示配置错误
 - Given PrimaryLockerRobot管理2个M号的Locker且都有可用容量，M号包，When PrimaryLockerRobot存包，Then包成功存入第1个Locker，返回M号的票据
 - Given PrimaryLockerRobot管理2个M号的Locker，locker1已满，locker2有可用容量，M号包，When PrimaryLockerRobot存包，Then包成功存入第2个Locker，返回M号的票据
