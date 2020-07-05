@@ -29,7 +29,9 @@ public class PrimaryLockerRobot {
 
     public Ticket store(Bag mBag) {
         for(AbstractLocker locker: lockers) {
-            return locker.store(mBag);
+            if (locker.getAvailableCapacity() > 0) {
+                return locker.store(mBag);
+            }
         }
         return null;
     }

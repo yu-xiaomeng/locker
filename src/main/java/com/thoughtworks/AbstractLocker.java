@@ -45,4 +45,8 @@ public abstract class AbstractLocker {
 
         throw new InvalidTicketException();
     }
+
+    public int getAvailableCapacity() {
+        return availableCapacity;
+    }
 }
